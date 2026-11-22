@@ -53,3 +53,15 @@ main p{margin:.6em 0}
 .btns{margin-top:6px}.btns a{display:inline-block;margin-right:8px;padding:1px 10px;font-size:.78rem;border:1px solid var(--line);border-radius:6px;background:none;color:var(--muted)}
 .btns a:hover{color:var(--accent);border-color:var(--accent)}
 @media(max-width:800px){.icons{justify-content:center}.pubs li{flex-direction:column;gap:8px}}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.tag{font:inherit;font-size:.85rem;padding:3px 14px;border:1px solid var(--line);background:var(--soft);color:var(--muted);border-radius:999px;cursor:pointer}
+.tag.on,button.tag:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+@media(prefers-color-scheme:dark){.tag.on,button.tag:hover{color:#0b1020}}
+.tag.sm{font-size:.75rem;padding:0 10px;cursor:default}
+a.tag{background-image:none}
+.bloglist{list-style:none;padding:0;margin:0}
+.bloglist li{display:flex;gap:20px;padding:16px 0;border-bottom:1px solid var(--line)}
+.bloglist .date{flex:none;width:92px;color:var(--muted);font-size:.9rem;font-variant-numeric:tabular-nums;padding-top:2px}
+.bloglist .tags{margin-top:6px;display:flex;gap:6px;flex-wrap:wrap}
+.post .meta{color:var(--muted);margin:-.2em 0 .4em}.post .tags{display:flex;gap:6px;margin:0 0 1.2em}
+@media(max-width:800px){.bloglist li{flex-direction:column;gap:2px}}
