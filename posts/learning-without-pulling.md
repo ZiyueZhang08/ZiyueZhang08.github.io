@@ -102,4 +102,6 @@ So, looking back at this paper, I think the most important lesson of Auxiliary I
 
 ---
 
+**Paper:** Yonatan Gur and Ahmadreza Momeni, *Adaptive Sequential Experiments with Unknown Information Arrival Processes*. [arXiv:1907.00107](https://arxiv.org/abs/1907.00107)
+
 *Note: This article was translated from Chinese by AI, and the language was polished with AI assistance.*
