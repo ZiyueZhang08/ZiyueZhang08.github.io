@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ziyue (Luke) Zhang</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="topbar"><div class="inner"><span class="brand">Ziyue (Luke) Zhang</span><nav>
+<a href="index.html">Home</a><a href="publications.html">Publications</a><a href="blog.html" class="active">Blog</a><a href="hobby.html">Hobby</a></nav></div></header>
+<div class="layout">
+<aside class="sidebar">
+  <img class="avatar" src="assets/img/avatar.jpg" alt="Ziyue (Luke) Zhang">
+  <h1>Ziyue (Luke) Zhang</h1>
+  <p class="affil">M.S. Student, Industrial &amp; Operations Engineering<br>University of Michigan, Ann Arbor</p>
+  <p class="icons"><a href="https://github.com/ZiyueZhang08" title="GitHub" aria-label="GitHub"><svg viewBox="0 0 24 24"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A11.5 11.5 0 0 0 23.5 12C23.5 5.7 18.3.5 12 .5z"/></svg></a><a href="mailto:zziyue@umich.edu" title="Email" aria-label="Email"><svg viewBox="0 0 24 24"><path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm1.5 2L12 12.5 19.5 7z"/></svg></a><a href="assets/files/cv.pdf" title="CV" aria-label="CV"><svg viewBox="0 0 24 24"><path d="M6 2h9l5 5v15H6zM14 3.5V8h4.5zM8.5 12h7v1.5h-7zm0 3h7v1.5h-7z"/></svg></a></p>
+  <h2>Research Interests</h2>
+  <ul class="interests"><li>Learning to Optimize</li><li>Statistical Learning</li><li>Operations Research for AI</li></ul>
+</aside>
+<main>
+<article class="post"><h2>Learning Without Pulling: How Auxiliary Information Changes Sequential Decision-Making</h2><p class="meta">2026-11-22</p><p class="tags"><a class="tag" href="blog.html#Paper Notes">Paper Notes</a></p><p><em>Reading Notes on Adaptive Sequential Experiments with Unknown
+Information Arrival Processes</em></p>
+<h3 id="part-i-paper-review">Part I — Paper Review</h3>
+<p>The classical Multi-Armed Bandit studies the Exploration–Exploitation
+Trade-off. A decision-maker repeatedly chooses among several arms with
+unknown rewards: on one hand she wants to exploit the option that
+currently looks best, and on the other she must explore actively to
+gather information that improves future decisions. Traditional
+stochastic bandits usually assume that a reward observation about an arm
+is obtained only by pulling that arm. In practice, information is not
+always generated this way. Take e-commerce recommendation as an example:
+even if the platform never recommends a product, some users may still
+reach it through a search engine and buy it. Such behavior is not caused
+by the current recommendation decision, yet it may carry important
+information about the product’s payoff. The starting point of this paper
+is to bring this kind of naturally arriving Auxiliary Information into
+the classical bandit framework.</p>
+<p>The authors let
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>h</mi><mrow><mi>k</mi><mo>,</mo><mi>t</mi></mrow></msub><annotation encoding="application/x-tex">h_{k,t}</annotation></semantics></math>
+denote the number of auxiliary observations about arm
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
+that arrive between two decision epochs, and let
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>H</mi><annotation encoding="application/x-tex">H</annotation></semantics></math>
+describe the full information arrival trajectory. These observations are
+assumed to be linked to the true expected reward through a mapping
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>ϕ</mi><mi>k</mi></msub><annotation encoding="application/x-tex">\phi_k</annotation></semantics></math>:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="double-struck">𝔼</mi><mo stretchy="false" form="prefix">[</mo><msub><mi>ϕ</mi><mi>k</mi></msub><mo stretchy="false" form="prefix">(</mo><msub><mi>Y</mi><mrow><mi>k</mi><mo>,</mo><mi>t</mi><mo>,</mo><mi>m</mi></mrow></msub><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">]</mo><mo>=</mo><msub><mi>μ</mi><mi>k</mi></msub><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\mathbb E[\phi_k(Y_{k,t,m})]=\mu_k.
+</annotation></semantics></math></p>
+<p>Unlike ordinary rewards, auxiliary information may arrive even when
+the corresponding arm is not pulled. The authors first consider the case
+where the mapping is known, and ask what performance sequential
+decision-making can theoretically achieve under an unknown and arbitrary
+exogenous information arrival trajectory.</p>
+<p>The paper first establishes a minimax regret lower bound that depends
+on the information arrival trajectory. Its core mathematical structure
+contains the term</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi mathvariant="normal">log</mi><mo>&#8289;</mo></mrow><mrow><mo stretchy="true" form="prefix">(</mo><munderover><mo>∑</mo><mrow><mi>t</mi><mo>=</mo><mn>1</mn></mrow><mi>T</mi></munderover><mi mathvariant="normal">exp</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>−</mi><mi>c</mi><munderover><mo>∑</mo><mrow><mi>s</mi><mo>=</mo><mn>1</mn></mrow><mi>t</mi></munderover><msub><mi>h</mi><mrow><mi>k</mi><mo>,</mo><mi>s</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\log\left(
+\sum_{t=1}^{T}
+\exp\left(-c\sum_{s=1}^{t}h_{k,s}\right)
+\right).
+</annotation></semantics></math></p>
+<p>The most interesting aspect of this structure is that the difficulty
+of the problem is determined not only by how much auxiliary information
+is eventually obtained, but also by <em>when</em> it arrives.
+Information that arrives earlier removes more uncertainty from more
+subsequent decisions. When the auxiliary information is sufficiently
+informative and arrives sufficiently often, cumulative regret can even
+improve from the classical logarithmic order to a bounded level.</p>
+<p>Having pinned down the theoretical lower bound, the authors ask
+whether one can design an algorithm that does not need to predict the
+future information arrival process. For UCB1, they incorporate auxiliary
+observations into both the reward estimate and the effective sample
+size; for Thompson Sampling, they use auxiliary information to update
+the sampling distribution. The result is aUCB1 and aTS. Theorems 2–3
+show that, with a known mapping, both algorithms adapt to the unknown
+information arrival trajectory and attain a regret growth rate that
+matches the corresponding lower bound. The key finding is that an
+algorithm does not need to forecast future information flows: by
+continually updating its own uncertainty, it adjusts its exploration
+intensity naturally.</p>
+<p>All of this, however, rests on a strong premise: that we know how to
+convert auxiliary information into true rewards. In reality, the mapping
+may be inaccurate. The authors therefore go on to study Unknown
+Mappings, mainly under a linear relationship:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>μ</mi><mi>k</mi></msub><mo>=</mo><msub><mi>α</mi><mi>k</mi></msub><msub><mi>y</mi><mi>k</mi></msub><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\mu_k=\alpha_k y_k.
+</annotation></semantics></math></p>
+<p>Even with infinitely many auxiliary observations, if
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>α</mi><mi>k</mi></msub><annotation encoding="application/x-tex">\alpha_k</annotation></semantics></math>
+is unknown, the true payoff may remain unidentifiable. Through
+counterexamples, different performance regimes, and
+information-theoretic lower bounds, the authors characterize when
+auxiliary information can reduce active exploration under an unknown
+mapping. When it is known that
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>α</mi><mi>k</mi></msub><mo>≤</mo><mover><mi>α</mi><mo accent="true">‾</mo></mover></mrow><annotation encoding="application/x-tex">\alpha_k\leq\bar\alpha</annotation></semantics></math>,
+we still have</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>μ</mi><mi>k</mi></msub><mo>≤</mo><mover><mi>α</mi><mo accent="true">‾</mo></mover><msub><mi>y</mi><mi>k</mi></msub><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\mu_k\leq\bar\alpha y_k.
+</annotation></semantics></math></p>
+<p>This means that even if we cannot estimate an arm’s reward
+accurately, as long as we can show that the arm cannot exceed the best
+arm even under the most optimistic conditions, we can explore it
+less.</p>
+<p>Building on this idea, the authors propose 2-UCBs. The algorithm
+constructs two upper confidence bounds for the same unknown parameter:
+one that depends only on direct rewards, and another that is an
+optimistic bound combining direct rewards with auxiliary data. It then
+uses</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>U</mi><mrow><mi>k</mi><mo>,</mo><mi>t</mi></mrow></msub><mo>=</mo><mrow><mi mathvariant="normal">min</mi><mo>&#8289;</mo></mrow><mrow><mo stretchy="true" form="prefix">{</mo><msubsup><mi>U</mi><mrow><mi>k</mi><mo>,</mo><mi>t</mi></mrow><mrow><mi>d</mi><mi>i</mi><mi>r</mi><mi>e</mi><mi>c</mi><mi>t</mi></mrow></msubsup><mo>,</mo><msubsup><mi>U</mi><mrow><mi>k</mi><mo>,</mo><mi>t</mi></mrow><mrow><mi>a</mi><mi>u</mi><mi>x</mi></mrow></msubsup><mo stretchy="true" form="postfix">}</mo></mrow><mi>.</mi></mrow><annotation encoding="application/x-tex">
+U_{k,t}=\min\left\{
+U_{k,t}^{direct},
+U_{k,t}^{aux}
+\right\}.
+</annotation></semantics></math></p>
+<p>I think this is the most memorable algorithmic insight of the paper:
+use two different information sources to place valid statistical
+constraints on the same unknown parameter, and act optimistically with
+the tighter one. It does not require recovering the unknown mapping
+exactly. Instead, it exploits a credible upper bound on the mapping, so
+that auxiliary data helps whenever it can provide a valid constraint,
+while the direct UCB prevents overly optimistic auxiliary estimates from
+misleading the algorithm. Theorem 6 gives the corresponding near-optimal
+performance guarantee.</p>
+<p>Finally, the authors build semi-synthetic experiments from
+media-website data to examine how the informativeness of auxiliary
+information and mapping misspecification affect decision performance.
+Having read the whole paper, I find it a very representative example of
+an OR research paradigm: identify an information structure that
+traditional models overlook in a real problem, study how this change
+affects the theoretical performance limits, and then design algorithms
+with matching guarantees. Its contribution goes beyond extending UCB or
+Thompson Sampling; more importantly, it re-characterizes how the
+information-generating mechanism shapes exploration and learning.</p>
+<h3 id="part-ii-my-perspectives">Part II — My Perspectives</h3>
+<p>Reading this paper made me realize that we usually think of
+information acquisition as a question of quantity: more observations,
+larger samples, more accurate estimates. But if we unfold how
+information is actually acquired in the real world, it looks more like a
+highly sparse matrix than a steadily growing data sequence.</p>
+<p>Consider a recommendation system. What we truly want to know is not
+just the overall purchase rate of a product, but the latent payoff of
+different products for different user groups in different contexts. If
+we put products in the rows and user groups in the columns, each cell
+represents an expected payoff we would like to learn. In reality, we can
+observe only a tiny fraction of them. Rewards from active
+recommendations fill in some cells, while auxiliary data from organic
+search, user reviews, or other channels provide indirect information
+about others. More precisely, these auxiliary observations do not
+necessarily fill the target reward matrix directly; rather, they impose
+constraints on some of its cells through an unknown mapping. We are
+actually facing two different information-acquisition mechanisms, and a
+latent payoff structure that is far from fully observed.</p>
+<p>From this perspective, active exploration and passive observation can
+be seen as two relatively independent axes. A decision problem may have
+abundant experimental data but almost no external information; it may
+have massive passive observations but no direct rewards; it may have
+both in abundance, or both in scarcity. But there is a question deeper
+than the amount of information: <strong>even if the information on both
+axes keeps growing, there is no guarantee that our coverage of the
+latent payoff matrix becomes more complete.</strong> The observations
+may keep concentrating in regions that are already well understood,
+while other regions remain untouched.</p>
+<p>For example, a platform may have millions of user-behavior records,
+but most come from a small number of popular products and active users.
+For inactive users, new products, or rare user–product combinations, we
+may still have almost no reliable observations. The platform holds more
+and more data, yet does not necessarily know more about these blind
+spots. More importantly, these blind spots are not necessarily randomly
+distributed. Active experiments tend to be allocated to products that
+currently look promising, and organic traffic is usually concentrated on
+products that already have some visibility. This means that two
+seemingly different information-acquisition mechanisms may produce
+highly overlapping data in the same regions and leave gaps in the same
+regions. What we end up with is an information system with a huge sample
+size but potentially severe structural missingness.</p>
+<p>This brings to mind a distinction: <strong>Information Volume and
+Information Coverage are not the same thing.</strong> If ten thousand
+observations all come from the same kind of user, they can let us
+estimate that group’s behavior very accurately, but they cannot
+automatically tell us how other groups will respond. Even if the two
+observation mechanisms are statistically independent in their noise,
+they may be measuring the same direction of the latent payoff structure.
+Conversely, a single observation from a previously uncovered population
+adds only one sample, but it may reveal a dimension that could not be
+identified from the existing data. The value of information therefore
+cannot be measured only by sample size or variance reduction; we must
+also consider what the new information adds relative to what we already
+have.</p>
+<p>The linear-algebra language makes this clearer. Suppose the unknown
+parameter we care about is a vector
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>θ</mi><annotation encoding="application/x-tex">\theta</annotation></semantics></math>,
+and the active and passive observations can be approximated respectively
+as</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi><mo>=</mo><mi>A</mi><mi>θ</mi><mo>+</mo><msub><mi>ϵ</mi><mi>D</mi></msub><mo>,</mo><mspace width="2.0em"></mspace><mi>Y</mi><mo>=</mo><mi>B</mi><mi>θ</mi><mo>+</mo><msub><mi>ϵ</mi><mi>P</mi></msub><mi>.</mi></mrow><annotation encoding="application/x-tex">
+X=A\theta+\epsilon_D,\qquad
+Y=B\theta+\epsilon_P.
+</annotation></semantics></math></p>
+<p>Here
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>
+describe which linear combinations of the latent parameter each of the
+two observation mechanisms can see. Even if we increase the number of
+observations without limit, if
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>
+keep measuring the same parameter directions, the system can retain
+unidentifiable degrees of freedom. In the idealized linear, noiseless
+setting, this unidentifiable structure is captured by the common null
+space:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="script">𝒩</mi><mo>=</mo><mrow><mi mathvariant="normal">ker</mi><mo>&#8289;</mo></mrow><mo stretchy="false" form="prefix">(</mo><mi>A</mi><mo stretchy="false" form="postfix">)</mo><mo>∩</mo><mrow><mi mathvariant="normal">ker</mi><mo>&#8289;</mo></mrow><mo stretchy="false" form="prefix">(</mo><mi>B</mi><mo stretchy="false" form="postfix">)</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\mathcal N=\ker(A)\cap\ker(B).
+</annotation></semantics></math></p>
+<p>If there is a nonzero direction
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi><mo>∈</mo><mi mathvariant="script">𝒩</mi></mrow><annotation encoding="application/x-tex">v\in\mathcal N</annotation></semantics></math>,
+then
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>θ</mi><annotation encoding="application/x-tex">\theta</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>θ</mi><mo>+</mo><mi>v</mi></mrow><annotation encoding="application/x-tex">\theta+v</annotation></semantics></math>
+may generate exactly the same two kinds of observations. No matter how
+many samples each source accumulates, we cannot tell them apart from
+these observations alone. What really deserves attention is no longer
+just how much data each source has, but whether the two observation
+mechanisms, taken together, eliminate the unidentifiable directions that
+matter for the decision at hand.</p>
+<p>The Unknown Mapping example in the paper is in fact the most compact
+version of this unidentifiability: in Example 2, two environments with
+different true rewards can produce exactly the same
+auxiliary-information distribution, so no amount of auxiliary data can
+distinguish them. (The matrices and null space above are my own
+extension, not part of the paper’s model.) <strong>Data scarcity is
+sometimes not a statistical problem, but a problem of the observation
+mechanism being unable to distinguish certain states of the
+world.</strong></p>
+<p>Of course, we do not need to eliminate every unidentifiable
+direction. If two worlds consistent with the data both say that A is
+better than B, this uncertainty does not affect the action;
+unidentifiability matters only when the two worlds give different
+answers about the optimal action. So the question can be posed directly:
+<strong>in a highly sparse observation system, which observations should
+we add in order to remove the decision-relevant unidentifiability as
+quickly as possible?</strong></p>
+<p>The difficulty is that real observation systems tilt themselves in
+one direction. A recommender keeps recommending products that already
+perform well, so those products keep gaining new reward data; search
+traffic also follows exposure and popularity. Products that are not
+recommended receive less direct feedback and less indirect information
+together. <strong>An algorithm may become more and more accurate in the
+regions it is already familiar with, yet, having never truly observed
+the others, mistakenly believe it understands the whole decision
+space.</strong> (Gur and Momeni assume that the arrival of auxiliary
+information is exogenous; this kind of Endogenous Information Arrival,
+where actions influence future observations, is exactly the extension
+the authors point to in their discussion of future research.)</p>
+<p>In today’s AI training, this is no longer just an efficiency issue,
+but an ethical one. Training data for large models comes mostly from the
+internet, and internet text is heavily concentrated in a few mainstream
+languages and mainstream groups. Languages and viewpoints with many
+users keep producing new data, so the model performs better on them,
+more people use it, and still more data is produced, forming a data
+flywheel. Minority languages and minority viewpoints go the opposite
+way: little data, poor model performance, fewer users, and even less
+data, until they gradually become islands of data. The model’s overall
+loss goes down and its benchmark scores go up, yet its understanding of
+these groups may have barely improved. And these voices are not
+unimportant just because there are few of them: the knowledge carried in
+a language with few speakers, or the firsthand experience of a minority
+group, is exactly what mainstream data cannot replace.</p>
+<p>In terms of the framework above, data that naturally arises on the
+internet is passive observation. Its distribution is determined by
+population size, economic conditions, and the degree of digitization, so
+it is inherently skewed toward the mainstream. If we merely wait for
+passive data to grow, the islands will only become more isolated. What
+is needed is the active-experiment side: deliberately acquiring data
+that will not arrive on its own, for instance by collaborating with
+minority-language communities to collect corpora, building dedicated
+evaluations for the groups on which the model performs poorly, or giving
+scarce but distinctive data higher weight during training. The goal is
+not to give every group the same amount of data, but to fill in the
+directions that the model currently cannot see at all and that affect
+how it treats a group of people. This is consistent with the earlier
+line of thought: the value of information lies not in how much there is,
+but in what it fills in.</p>
+<p>Following this logic, I ended up with a question that differs from
+the original paper but arises naturally from it: can we treat the
+information-acquisition process of an intelligent system as an object to
+be optimized? The system does not need to fill in every cell of the
+latent payoff matrix, nor estimate every unknown parameter precisely;
+what it needs is a set of observations, as small as possible, that is
+still sufficient to distinguish the key decisions. Passive information
+keeps arriving and continually changes the set of feasible worlds, while
+active experiments have the chance, when necessary, to obtain the
+critical evidence that existing information cannot provide. The real
+optimization objective is not to maximize the total amount of
+information, but to reduce, under limited cost, those unknowns that
+could change the optimal action. Such an observation structure can be
+highly sparse, but it must cover the key directions that determine which
+actions are better. It has some conceptual connections to model
+compression, sparse representation, and experimental design, except that
+what is being compressed here is not the data itself but the knowledge
+required for effective decisions.</p>
+<p>So, looking back at this paper, I think the most important lesson of
+Auxiliary Information may be not just how many active pulls it can save,
+but that it makes us question the assumptions that traditional learning
+models make about how information is acquired. In the real world, we do
+not face a world that can be freely and completely observed, but a
+sparse information structure formed jointly by different observation
+mechanisms, selection bias, unknown mappings, and historical decisions.
+How to make decisions within such an incomplete structure is more
+fundamental than how to use more data.</p>
+<hr />
+<p><em>Note: This article was translated from Chinese by AI, and the
+language was polished with AI assistance.</em></p>
+<p><a href="blog.html" class="active">← All posts</a></p></article>
+</main>
+</div>
+<footer class="site-footer">© 2026 Ziyue (Luke) Zhang</footer>
+</body>
+</html>
